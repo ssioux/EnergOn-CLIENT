@@ -1,8 +1,8 @@
 import "./App.css";
 
 import { Route, Routes } from "react-router-dom";
-import ChargersDetails from "./Components/ChargersDetails";
-import ChargerPoints from "./Pages/ChargerPoints";
+import ChargersDetails from "./components/ChargersDetails";
+import ChargerPoints from "./pages/ChargerPoints";
 
 function App() {
   return (
