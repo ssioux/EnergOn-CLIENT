@@ -7,7 +7,7 @@ const listChargersService = () => {
 };
 
 const detailsChargerService = (chargerId) => {
-  return service.get(`/chargers/${chargerId}/details`);
+  return service.get(`/chargers/details`);
 };
 
 export { listChargersService, detailsChargerService };

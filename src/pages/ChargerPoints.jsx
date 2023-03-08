@@ -3,7 +3,7 @@ import { listChargersService } from "../services/chargerPoints.services";
 import { Link } from "react-router-dom";
 
 function ChargerPoints() {
-  const [chargerPointsList, setChargerPointsList] = useState(null);
+  const [chargerPointsList, setChargerPointsList] = useState();
   const [isFetching, setIsFetching] = useState(true);
 
   useEffect(() => {
@@ -11,12 +11,9 @@ function ChargerPoints() {
   }, []);
 
   const getData = async () => {
-    const response = await listChargersService();
+    const response = await listChargersService(null);
     const chargersList = response.data;
-    console.log(
-      "🚀 ~ file: ChargerPoints.jsx:17 ~ getData ~ chargersList:",
-      chargersList
-    );
+   
     setChargerPointsList(chargersList);
 
     setIsFetching(false);
@@ -30,8 +27,8 @@ function ChargerPoints() {
     <section>
       {chargerPointsList?.map((eachCP) => {
         return (
-          <div>
-            <Link to={`/charger/${eachCP.id}/details`} key={eachCP.id}>
+          <div key={eachCP.id}>
+            <Link to={`/charger/${eachCP.id}/details`}>
               <h3>{eachCP.charge_point_id}</h3>
             </Link>
             <p>STATUS [ {eachCP.status.toUpperCase()} ]</p>
