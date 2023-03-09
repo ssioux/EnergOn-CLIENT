@@ -2,19 +2,13 @@
   text-align: center;
 }
 
-.row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid green;
-   
-}
-
-.row p{
-  margin-left: 10px;
-}
-
 .general-content {
   margin: 0 auto;
   border: 1px solid red;
+  width: 100vw;
+  height: 100vh;
+}
+
+.graph-size {
+  width: 500px;
 }

@@ -1,8 +1,13 @@
+// React Hooks
 import { useState, useEffect } from "react";
+// Services to DB
 import { detailsChargerService } from "../services/chargerPoints.services";
+// Graphics imported
+import BarChart from "./charts/BarChart";
 
 function ChargersDetails() {
   const [chargerPointdDetails, setChargerPointDetails] = useState(null);
+
   const [isFetching, setIsFetching] = useState(true);
 
   useEffect(() => {
@@ -11,11 +16,9 @@ function ChargersDetails() {
 
   const getData = async () => {
     const response = await detailsChargerService();
-    const chargersDetails = response.data;
-    console.log("🚀 ChargerDetails:", chargersDetails)
-   
-    setChargerPointDetails(chargersDetails);
+    const details = response.data;
 
+    setChargerPointDetails(details);
     setIsFetching(false);
   };
 
@@ -25,21 +28,21 @@ function ChargersDetails() {
 
   return (
     <section className="general-content">
-    {chargerPointdDetails?.map((eachDetail) => {
-      return (
-        <div key={eachDetail.id} className="row">
-          
-            <h5>{eachDetail.charge_point_id}</h5>
-            <p>{eachDetail.value}</p>
-            <p>{eachDetail.unit}</p>
-
-         
-          
-        </div>
-      );
-    })}
-  </section>
-  )
+      <div className="graph-size">
+        <BarChart
+          chartData={{
+            labels: chargerPointdDetails?.map((data) => data.timestamp),
+            datasets: [
+              {
+                label: "value",
+                data: chargerPointdDetails?.map((data) => data.value),
+              },
+            ],
+          }}
+        />
+      </div>
+    </section>
+  );
 }
 
-export default ChargersDetails
+export default ChargersDetails;
